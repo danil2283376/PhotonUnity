@@ -69,6 +69,22 @@ public class PlayerHandler : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        if (view.IsMine)
+        {
+            moving.DoFixedUpdate();
+        }
+    }
+
+    private void Update()
+    {
+        if (view.IsMine)
+        {
+            moving.DoUpdate();
+        }
+    }
+
     private void LateUpdate()
     {
         if (view.IsMine)

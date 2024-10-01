@@ -10,6 +10,7 @@ public class RunState : /*MonoBehaviour,*/ IMoving
 
     private float _walkSpeed = 25f;
     private float _runSpeed = 50f;
+    public float damping = 0.9f; // Коэффициент затухания
 
     private float _currentSpeedPlayer = 0f;
     private Rigidbody _playerBody;
@@ -25,17 +26,6 @@ public class RunState : /*MonoBehaviour,*/ IMoving
     }
     public void DoFixedUpdate()
     {
-        
-    }
-
-    public void DoUpdate()
-    {
-        
-    }
-
-    public void DoLateUpdate()
-    {
-        //Debug.Log("Персонаж бежит");
         if (view.IsMine)
         {
             float horizontalInput = Input.GetAxis("Horizontal");
@@ -73,7 +63,56 @@ public class RunState : /*MonoBehaviour,*/ IMoving
             {
                 PlayerHandler.ChangeState(new IdleState());
             }
+            _playerBody.velocity *= damping;
         }
+    }
+
+    public void DoUpdate()
+    {
+        
+    }
+
+    public void DoLateUpdate()
+    {
+        //Debug.Log("Персонаж бежит");
+        //if (view.IsMine)
+        //{
+        //    float horizontalInput = Input.GetAxis("Horizontal");
+        //    float verticalInput = Input.GetAxis("Vertical");
+
+        //    Vector3 movement = PlayerHandler.transform.right * horizontalInput + PlayerHandler.transform.forward * verticalInput;//new Vector3(horizontalInput, 0f, verticalInput);
+
+        //    movement.Normalize();
+
+        //    if (movement != Vector3.zero)
+        //    {
+        //        PlayerHandler.animator.SetBool("Moving", true);
+        //        // Use run
+        //        if (Input.GetKey(KeyCode.LeftShift))
+        //        {
+        //            verticalInput = Mathf.Clamp(verticalInput, -1f, 1f);
+        //            horizontalInput = Mathf.Clamp(horizontalInput, -0.5f, 0.5f);
+        //            _currentSpeedPlayer = _runSpeed;
+        //            if (_playerBody.velocity.magnitude < _maxMagnitudeForRun)
+        //                _playerBody.AddForce(movement * _currentSpeedPlayer * Time.deltaTime, ForceMode.VelocityChange);
+        //        }
+        //        else // use walk 
+        //        {
+        //            verticalInput = Mathf.Clamp(verticalInput, -0.5f, 0.5f);
+        //            //horizontalInput = Mathf.Clamp(horizontalInput, -0.25f, 0.25f);
+        //            horizontalInput = Mathf.Clamp(horizontalInput, -0.5f, 0.5f);
+        //            _currentSpeedPlayer = _walkSpeed;
+        //            if (_playerBody.velocity.magnitude < _maxMagnitudeForWalk)
+        //                _playerBody.AddForce(movement * _currentSpeedPlayer * Time.deltaTime, ForceMode.VelocityChange);
+        //        }
+        //        PlayerHandler.animator.SetFloat("Velocity Z", verticalInput);
+        //        PlayerHandler.animator.SetFloat("Velocity X", horizontalInput);
+        //    }
+        //    else
+        //    {
+        //        PlayerHandler.ChangeState(new IdleState());
+        //    }
+        //}
     }
 
     public void Stop()

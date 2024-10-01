@@ -28,7 +28,7 @@ public class MouseLook : MonoBehaviour
         //mouseSensitivity = 5f;
     }
 
-    void LateUpdate()
+    private void FixedUpdate()
     {
         if (_init && _view.IsMine)
         {
