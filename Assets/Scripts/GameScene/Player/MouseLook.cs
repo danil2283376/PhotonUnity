@@ -9,7 +9,7 @@ public class MouseLook : MonoBehaviour
     public float mouseSensitivity = 100f;
     public float damping = 0.9f; // Коэффициент затухания инерции
 
-    private float xRotation = 0f;
+    //private float xRotation = 0f;
     private bool _init = false;
     private Transform _playerBody;
     private PhotonView _view;
